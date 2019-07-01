@@ -11,3 +11,8 @@ class BoardGame(models.Model):
     maxplaytime = models.PositiveSmallIntegerField(on_delete=models.CASCADE)
     weight = models.DecimalField(max_digits=4, decimal_places=4)
     bggurl = models.URLField()
+
+
+class User(models.Model):
+    user = models.OneToOneField(User)
+    boardgames = models.ManyToManyField(BoardGame)
