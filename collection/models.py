@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class BoardGame(models.Model):
+    name = models.TextField()
     yearpublished = models.SmallIntegerField()
     minplayers = models.PositiveSmallIntegerField()
     maxplayers = models.PositiveSmallIntegerField()
