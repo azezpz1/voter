@@ -4,15 +4,15 @@ from django.contrib.auth.models import User
 
 
 class BoardGame(models.Model):
-    yearpublished = models.SmallIntegerField(on_delete=models.CASCADE)
-    minplayers = models.PositiveSmallIntegerField(on_delete=models.CASCADE)
-    maxplayers = models.PositiveSmallIntegerField(on_delete=models.CASCADE)
-    minplaytime = models.PositiveSmallIntegerField(on_delete=models.CASCADE)
-    maxplaytime = models.PositiveSmallIntegerField(on_delete=models.CASCADE)
+    yearpublished = models.SmallIntegerField()
+    minplayers = models.PositiveSmallIntegerField()
+    maxplayers = models.PositiveSmallIntegerField()
+    minplaytime = models.PositiveSmallIntegerField()
+    maxplaytime = models.PositiveSmallIntegerField()
     weight = models.DecimalField(max_digits=4, decimal_places=4)
     bggurl = models.URLField()
 
 
 class User(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     boardgames = models.ManyToManyField(BoardGame)
