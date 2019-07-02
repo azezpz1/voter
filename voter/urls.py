@@ -21,5 +21,5 @@ from .views import welcome
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", welcome, name="voter_welcome"),
-    path("user/", include("collection.urls")),
+    path("collection/", include("collection.urls")),
 ]
