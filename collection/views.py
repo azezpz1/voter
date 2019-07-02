@@ -9,4 +9,4 @@ def user_home(request):
 
 @login_required()
 def add_game(request):
-    return render(request, "collection/add_game.html")
+    return render(request, "collection/add_game_form.html")
