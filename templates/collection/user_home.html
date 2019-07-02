@@ -6,4 +6,9 @@
 
 {% block content %}
     <h2 class="text-primary">Welcome, {{ user.username }}</h2>
+
+    <p>Click below to add a game to your collection</p>
+    <p>
+        <a class="btn btn-primary" href="{% url 'add_game' %}">Add a game</a>
+    </p>
 {% endblock %}
