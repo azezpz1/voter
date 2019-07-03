@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import AddGameForm
 from .models import BoardGame
+from .utils import get_id_from_bggurl
 
 
 @login_required()
@@ -14,12 +15,14 @@ def user_home(request):
 def add_game(request):
     return render(request, "collection/add_game_form.html")
 
+
 @login_required()
 def add_boardgame(request):
     if request.method == "POST":
         boardgame = BoardGame()
         form = AddGameForm(instance=boardgame, data=request.POST)
         bggurl = form["bggurl"].value()
+        bggid = get_id_from_bggurl(bggurl)
         if form.is_valid():
             form.save()
             return redirect("user_home")
