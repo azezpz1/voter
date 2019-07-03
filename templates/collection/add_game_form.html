@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Add a board game to {{user.username}}'s collection'
@@ -6,4 +7,11 @@
 
 {% block content %}
     <h2 class="text-primary">Add a board game:</h2>
+    <p>Paste a boardgamegeek URL in the form below to add</p>
+    <form action="{% url 'user_add_boardgame' %}" method="post">
+        {{ form |crispy}}
+
+        {% csrf_token %}
+        <button type="submit" >Add this board game</button>
+    </form>
 {% endblock %}
