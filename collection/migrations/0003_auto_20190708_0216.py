@@ -6,14 +6,11 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
+    atomic = False
+
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('collection', '0002_boardgame_name'),
+        ("collection", "0002_boardgame_name"),
     ]
 
-    operations = [
-        migrations.RenameModel(
-            old_name='User',
-            new_name='SiteUser',
-        ),
-    ]
+    operations = [migrations.RenameModel(old_name="User", new_name="SiteUser")]
