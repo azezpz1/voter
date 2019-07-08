@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import AddGameForm
 from .models import BoardGame
-from .utils import get_id_from_bggurl
+from .utils import get_id_from_bggurl, get_boardgame_obj_from_bgg
 
 
 @login_required()
@@ -23,9 +23,13 @@ def add_boardgame(request):
         form = AddGameForm(instance=boardgame, data=request.POST)
         bggurl = form["bggurl"].value()
         bggid = get_id_from_bggurl(bggurl)
-        if form.is_valid():
-            form.save()
-            return redirect("user_home")
+        if not BoardGame.objects.filter(bggid__exact=bggid):
+            # The board game hasn't been added to the database yet
+            bg_obj = get_boardgame_obj_from_bgg(bggid)
+            # TODO: Need to decide what we want stored in the db from the bg_obj
+            if form.is_valid():
+                form.save()
+                return redirect("user_home")
     else:
         form = AddGameForm()
     form = AddGameForm()
