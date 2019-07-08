@@ -14,6 +14,6 @@ class BoardGame(models.Model):
     bggurl = models.URLField()
 
 
-class User(models.Model):
+class SiteUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     boardgames = models.ManyToManyField(BoardGame)
