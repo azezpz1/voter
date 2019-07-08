@@ -12,6 +12,7 @@ class BoardGame(models.Model):
     maxplaytime = models.PositiveSmallIntegerField()
     weight = models.DecimalField(max_digits=4, decimal_places=4)
     bggurl = models.URLField()
+    bggid = models.PositiveSmallIntegerField(unique=True)
 
 
 class SiteUser(models.Model):
