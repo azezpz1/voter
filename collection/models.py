@@ -10,7 +10,7 @@ class BoardGame(models.Model):
     maxplayers = models.PositiveSmallIntegerField()
     minplaytime = models.PositiveSmallIntegerField()
     maxplaytime = models.PositiveSmallIntegerField()
-    weight = models.DecimalField(max_digits=4, decimal_places=4)
+    weight = models.DecimalField(max_digits=5, decimal_places=4)
     bggurl = models.URLField()
     bggid = models.PositiveSmallIntegerField(unique=True)
 

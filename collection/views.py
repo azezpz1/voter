@@ -24,11 +24,23 @@ def add_boardgame(request):
         bggurl = form["bggurl"].value()
         bggid = get_id_from_bggurl(bggurl)
         if not BoardGame.objects.filter(bggid__exact=bggid):
-            # The board game hasn't been added to the database yet
-            bg_obj = get_boardgame_obj_from_bgg(bggid)
-            # TODO: Need to decide what we want stored in the db from the bg_obj
             if form.is_valid():
-                form.save()
+                # The board game hasn't been added to the database yet
+                bg_form = form.save(commit=False)
+                # commit=False tells Django that "Don't send this to database yet.
+                # I have more things I want to do with it."
+                # From: https://stackoverflow.com/questions/22739701/django-save-modelform
+                bg_obj = get_boardgame_obj_from_bgg(bggid)
+                bg_form.name = bg_obj.name
+                bg_form.yearpublished = bg_obj.yearpublished
+                bg_form.minplayers = bg_obj.minplayers
+                bg_form.maxplayers = bg_obj.maxplayers
+                bg_form.minplaytime = bg_obj.minplaytime
+                bg_form.maxplaytime = bg_obj.maxplaytime
+                bg_form.weight = bg_obj.rating_average_weight
+                bg_form.bggurl = bggurl
+                bg_form.bggid = bggid
+                bg_form.save() # Send it to the DB
                 return redirect("user_home")
     else:
         form = AddGameForm()
